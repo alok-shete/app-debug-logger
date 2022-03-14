@@ -3,18 +3,13 @@ const packageJson = require("./../package.json");
 
 export default class Logger extends EventEmitter {
   id: any;
-  init: () => void;
   constructor(config: any) {
     super();
     const { id = "logger_event" } = config;
     this.id = id;
 
-    this.init = function () {
-      console.log("*** Welcome in App Logger ***");
-      console.log("*** Current Version : ", packageJson.version);
-    };
-
-    this.init();
+    console.log("*** Welcome in App Logger ***");
+    console.log("*** Current Version : ", packageJson.version);
   }
 
   /**
@@ -111,4 +106,4 @@ export default class Logger extends EventEmitter {
   warn(moduleName: string, message: string) {
     this.processLog("warn", moduleName, message);
   }
-};
+}

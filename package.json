@@ -1,7 +1,7 @@
 {
-  "name": "format-currency",
+  "name": "app-debug-logger",
   "version": "1.0.0",
-  "description": "This is an NPM module that accepts a number, with implied decimals, and returns a string currency. example: $500.00",
+  "description": "A powerful and customizable logging library for node.js",
   "main": "dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DavidAMcIntosh/format-currency.git"
+    "url": "git+https://github.com/alok-shete/app-debug-logger.git"
   },
-  "author": "",
+  "author": "Alok Shete",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/DavidAMcIntosh/format-currency/issues"
+    "url": "https://github.com/alok-shete/app-debug-logger/issues"
   },
-  "homepage": "https://github.com/DavidAMcIntosh/format-currency#readme",
+  "homepage": "https://github.com/alok-shete/app-debug-logger#readme",
   "devDependencies": {
     "@types/node": "^17.0.21",
     "typescript": "^4.6.2"
