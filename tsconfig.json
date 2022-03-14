@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "target": "es5", // Specifies the ECMAScript version to use.
+    "module": "commonjs", // Species the module code generation to use (commonjs for npm modules)
+    "declaration": true, // Whether or not to generate `.d.ts` file
+    "outDir": "./dist", // Output directory for builds
+    "strict": true
+  }
+}
