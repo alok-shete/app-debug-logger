@@ -1,5 +1,12 @@
 import * as EventEmitter from "events";
-const packageJson = require("./../package.json");
+import common from "./common";
+
+const {
+  printConsoleLog,
+  loggerCurrentVersion,
+  getPackagesJson,
+  versionToNumber,
+} = common;
 
 export default class Logger extends EventEmitter {
   id: any;
@@ -9,73 +16,51 @@ export default class Logger extends EventEmitter {
     this.id = id;
 
     console.log("*** Welcome in App Logger ***");
-    console.log("*** Current Version : ", packageJson.version);
+    console.log("*** Current Version : ", loggerCurrentVersion);
+
+    let loggerLiveVersion = "0.0.0";
+    getPackagesJson()
+      .then((res: any) => {
+        const packageJsonVersion = res.version ?? "0.0.0";
+        loggerLiveVersion = packageJsonVersion;
+
+        if (
+          versionToNumber(loggerLiveVersion) >
+          versionToNumber(loggerCurrentVersion)
+        ) {
+          this.processLog(
+            "warn",
+            "LOGGER",
+            "*** Seems you are using old package please update ***",
+            false
+          );
+        }
+      })
+      .catch(() => {});
   }
 
   /**
    * Create Events
-   * @param {*} event - string
-   * @param {*} payload - any
+   * @param {string} event
+   * @param {Object} payload
    */
   private createEvent(event: string, payload: any) {
     this.emit(this.id, { event, payload });
   }
 
   /**
-   * parse data info
-   * @param {*} fullDate
-   * @returns
-   */
-  private parseDate = (fullDate: Date) => {
-    const d = new Date(fullDate);
-    const date = d.toISOString().split("T")[0];
-    const hour = `0${d.getHours()}`.slice(-2);
-    const min = `0${d.getMinutes()}`.slice(-2);
-    const sec = `0${d.getSeconds()}`.slice(-2);
-    return `${date} ${hour}:${min}:${sec}`;
-  };
-
-  /**
-   * print log on console
-   * @param payload
-   */
-  private printConsoleLog(payload: any) {
-    const { type, moduleName, message, loggedAt } = payload;
-
-    /**
-     * log text color content
-     */
-    const logColor: any = {
-      info: "\x1b[36m%s\x1b[0m",
-      success: "\x1b[32m%s\x1b[0m",
-      error: "\x1b[31m%s\x1b[0m",
-      warn: "\x1b[33m%s\x1b[0m",
-    };
-
-    /**
-     * create log string
-     */
-    const log = `${this.parseDate(
-      loggedAt
-    )} : [${type.toUpperCase()}] : ${moduleName} - ${message}`;
-
-    /**
-     * print log
-     */
-    if (logColor[type]) {
-      console.log(logColor[type], log);
-    } else {
-      console.log(log);
-    }
-  }
-
-  /**
    * process log
-   * @param type
-   * @param moduleName
-   * @param message
+   * @param {string} type
+   * @param {string} moduleName
+   * @param {string} message
+   * @param {boolean} isEventEmit - default false
    */
-  private processLog(type: string, moduleName: string, message: string) {
+  private processLog(
+    type: string,
+    moduleName: string,
+    message: string,
+    isEventEmit = true
+  ) {
     const payload = {
       type,
       loggedAt: new Date(),
@@ -83,26 +68,51 @@ export default class Logger extends EventEmitter {
       message,
     };
 
-    this.printConsoleLog(payload);
-    this.createEvent("log", payload);
+    printConsoleLog(payload);
+    isEventEmit ? this.createEvent("log", payload) : null;
   }
 
+  /**
+   *
+   * @param {string} moduleName
+   * @param {string} message
+   */
   debug(moduleName: string, message: string) {
     this.processLog("debug", moduleName, message);
   }
 
+  /**
+   *
+   * @param {string} moduleName
+   * @param {string} message
+   */
   info(moduleName: string, message: string) {
     this.processLog("info", moduleName, message);
   }
+  /**
+   *
+   * @param {string} moduleName
+   * @param {string} message
+   */
 
   success(moduleName: string, message: string) {
     this.processLog("success", moduleName, message);
   }
 
+  /**
+   *
+   * @param {string} moduleName
+   * @param {string} message
+   */
   error(moduleName: string, message: string) {
     this.processLog("error", moduleName, message);
   }
 
+  /**
+   *
+   * @param {string} moduleName
+   * @param {string} message
+   */
   warn(moduleName: string, message: string) {
     this.processLog("warn", moduleName, message);
   }
