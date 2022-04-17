@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
+    "dev": "tsc",
     "build": "rm -r dist && tsc"
   },
   "repository": {
