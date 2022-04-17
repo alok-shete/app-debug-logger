@@ -5,11 +5,12 @@
   "main": "dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "tsc": "tsc"
+    "start": "tsc"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/alok-shete/app-debug-logger.git"
+    "url": "git+https://github.com/alok-shete/app-debug-logger.git",
+    "path": "/repos/alok-shete/app-debug-logger/contents/package.json?ref=main"
   },
   "author": "Alok Shete",
   "license": "MIT",

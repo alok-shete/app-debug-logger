@@ -5,6 +5,6 @@ LOG.on(LOG.id, function (e) {
   console.log(e);
 });
 
-LOG.info("demo", "smkmlkmslm");
-LOG.info("demo", "smkmlkmslm");
-LOG.info("demo", "smkmlkmslm");
+// LOG.info("demo", "smkmlkmslm");
+// LOG.info("demo", "smkmlkmslm");
+// LOG.info("demo", "smkmlkmslm");

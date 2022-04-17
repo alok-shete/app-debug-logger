@@ -24,6 +24,8 @@ export default class Logger extends EventEmitter {
         const packageJsonVersion = res.version ?? "0.0.0";
         loggerLiveVersion = packageJsonVersion;
 
+        console.log(loggerLiveVersion);
+
         if (
           versionToNumber(loggerLiveVersion) >
           versionToNumber(loggerCurrentVersion)
@@ -36,7 +38,10 @@ export default class Logger extends EventEmitter {
           );
         }
       })
-      .catch(() => {});
+      .catch((err) => {
+        console.log(err);
+        console.log("err");
+      });
   }
 
   /**
