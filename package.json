@@ -6,7 +6,7 @@
   "types": "./dist/index.d.ts",
   "scripts": {
     "dev": "tsc",
-    "build": "rm -r dist && tsc"
+    "build": "rm -rf dist && tsc"
   },
   "repository": {
     "type": "git",
