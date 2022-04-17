@@ -1,60 +1,25 @@
 {
-  "version": "0.0.1",
-  "license": "MIT",
+  "name": "app-debug-logger",
+  "version": "0.0.3",
+  "description": "A powerful and customizable logging library for node.js",
   "main": "dist/index.js",
-  "typings": "dist/index.d.ts",
-  "files": [
-    "dist",
-    "src"
-  ],
-  "engines": {
-    "node": ">=10"
-  },
+  "types": "./dist/index.d.ts",
   "scripts": {
-    "start": "tsdx watch",
-    "build": "tsdx build",
-    "test": "tsdx test",
-    "lint": "tsdx lint",
-    "prepare": "tsdx build",
-    "size": "size-limit",
-    "analyze": "size-limit --why"
-  },
-  "peerDependencies": {},
-  "husky": {
-    "hooks": {
-      "pre-commit": "tsdx lint"
-    }
-  },
-  "prettier": {
-    "printWidth": 80,
-    "semi": true,
-    "singleQuote": true,
-    "trailingComma": "es5"
+    "build": "rm -r dist && tsc"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/alok-shete/app-debug-logger.git",
     "path": "/repos/alok-shete/app-debug-logger/contents/package.json?ref=main"
   },
-  "name": "app-debug-logger",
   "author": "Alok Shete",
-  "module": "dist/app-debug-logger.esm.js",
-  "size-limit": [
-    {
-      "path": "dist/app-debug-logger.cjs.production.min.js",
-      "limit": "10 KB"
-    },
-    {
-      "path": "dist/app-debug-logger.esm.js",
-      "limit": "10 KB"
-    }
-  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alok-shete/app-debug-logger/issues"
+  },
+  "homepage": "https://github.com/alok-shete/app-debug-logger#readme",
   "devDependencies": {
-    "@size-limit/preset-small-lib": "^7.0.8",
-    "husky": "^7.0.4",
-    "size-limit": "^7.0.8",
-    "tsdx": "^0.14.1",
-    "tslib": "^2.3.1",
-    "typescript": "^4.6.3"
+    "@types/node": "^17.0.21",
+    "typescript": "^4.6.2"
   }
 }
