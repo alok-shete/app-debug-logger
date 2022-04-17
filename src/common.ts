@@ -3,7 +3,7 @@ const loggerCurrentVersion = require('./../package.json').version;
 const packageJsonPath = require('./../package.json').repository.path;
 
 /**
- *
+ * get package json
  * @returns
  */
 const getPackagesJson = function() {
