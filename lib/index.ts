@@ -1,21 +1,7 @@
-import { EventEmitter } from 'events';
-import common from './common';
+import { EventEmitter } from "events";
+import common from "./common";
 
-const {
-  printConsoleLog,
-  loggerCurrentVersion,
-  getPackagesJson,
-  versionToNumber,
-  validateLoggerConfig,
-} = common;
-
-// interface LoggerConfig {
-//   id: string;
-//   eventLog: any;
-//   consoleLog: any;
-//   isProduction: boolean;
-// }
-
+const { printConsoleLog, validateLoggerConfig } = common;
 export class Logger extends EventEmitter {
   id: string;
   isEventLog?: false;
@@ -28,16 +14,16 @@ export class Logger extends EventEmitter {
   success: Function;
 
   constructor(config: {
-    id?: 'logger_event';
+    id?: "app-debug-logger";
     isEventLog?: false;
     consoleLog?: string[];
     isProduction?: false;
   }) {
     super();
     const {
-      id = 'logger_event',
+      id = "app-debug-logger",
       isEventLog = false,
-      consoleLog = ['info', 'error', 'warn', 'success', 'debug'],
+      consoleLog = ["info", "error", "warn", "success", "debug"],
       isProduction = false,
     } = validateLoggerConfig(config);
     this.id = id;
@@ -45,50 +31,23 @@ export class Logger extends EventEmitter {
     this.consoleLog = consoleLog;
     this.isProduction = isProduction;
 
-    console.log('*** Welcome in App Logger ***');
-    console.log('*** Current Version : ', loggerCurrentVersion);
-    this.checkLoggerVersion();
+    console.log("*** Welcome in App Logger ***");
 
     this.debug = (moduleName: string, message: string) => {
-      this.processLog('debug', moduleName, message);
+      this.processLog("debug", moduleName, message);
     };
     this.info = (moduleName: string, message: string) => {
-      this.processLog('info', moduleName, message);
+      this.processLog("info", moduleName, message);
     };
     this.error = (moduleName: string, message: string) => {
-      this.processLog('error', moduleName, message);
+      this.processLog("error", moduleName, message);
     };
     this.warn = (moduleName: string, message: string) => {
-      this.processLog('warn', moduleName, message);
+      this.processLog("warn", moduleName, message);
     };
     this.success = (moduleName: string, message: string) => {
-      this.processLog('success', moduleName, message);
+      this.processLog("success", moduleName, message);
     };
-  }
-
-  /**
-   * check Logger version
-   */
-  private checkLoggerVersion() {
-    let loggerLiveVersion = '0.0.0';
-    getPackagesJson()
-      .then((res: any) => {
-        const packageJsonVersion = res.version ?? '0.0.0';
-        loggerLiveVersion = packageJsonVersion;
-
-        if (
-          versionToNumber(loggerLiveVersion) >
-          versionToNumber(loggerCurrentVersion)
-        ) {
-          this.processLog(
-            'warn',
-            'LOGGER',
-            '*** Seems you are using old package please update ***',
-            false
-          );
-        }
-      })
-      .catch(() => {});
   }
 
   /**
@@ -132,7 +91,7 @@ export class Logger extends EventEmitter {
       printConsoleLog(payload);
     }
     if (isEventEmit) {
-      this.createEvent('log', payload);
+      this.createEvent("log", payload);
     }
 
     return true;

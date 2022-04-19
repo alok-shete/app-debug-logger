@@ -1,12 +1,13 @@
 {
   "name": "app-debug-logger",
-  "version": "0.0.6",
-  "description": "A powerful and customizable logging library for node.js",
+  "version": "0.0.7",
+  "description": "A powerful and customizable logging library for Javascript Application",
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
-    "dev": "tsc",
-    "build": "rm -rf dist && tsc"
+    "dev": "rm -rf dist && tsc",
+    "build": "",
+    "setup": "cd builder && node run.js"
   },
   "repository": {
     "type": "git",
